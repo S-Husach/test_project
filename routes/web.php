@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get(
+    '/donate', function () {
+        return view('donation');
+    }
+);
+
+Route::post('/donate/submit', 'DonationController@submit');
+
+Route::get('/', 'DonationController@allData');

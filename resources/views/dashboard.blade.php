@@ -34,30 +34,57 @@
   </div>
 </div>
 
+<div class="card-deck mb-4 text-center">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+var analytics = <?php echo $amount; ?>
+google.charts.load('current', {'packages':['corechart', 'line']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+    var data = new google.visualization.DataTable();
+    var data = google.visualization.arrayToDataTable(analytics);
+    var options = {
+      title: 'Donation Statistics',
+      curveType: 'none',
+      legend: { position: 'bottom' },
+    };
+    var chart = new google.visualization.LineChart(
+        document.getElementById('curve_chart')
+    );
+    chart.draw(data, options);
+}
+</script>
+<div id="curve_chart" style="width: 1400px; height: 400px"></div>
+</div>
+
 <div class="container">
-<table class="table table-striped table-sm">
-          <thead>
+    <table class="table table-striped table-sm">
+        <thead>
             <tr>
-              <th>Donator Name</th>
-              <th>Email</th>
-              <th>Amount</th>
-              <th>Message</th>
-              <th>Date</th>
+                <th>Donator Name</th>
+                <th>Email</th>
+                <th>Amount</th>
+                <th>Message</th>
+                <th>Date</th>
             </tr>
-          </thead>
-          <tbody>
+        </thead>
+        <tbody>
             @foreach($data as $donate)
             <tr>
-              <td>{{$donate->name}}</td>
-              <td>{{$donate->email}}</td>
-              <td>{{$donate->amount}}</td>
-              <td>{{$donate->message}}</td>
-              <td>{{$donate->created_at}}</td>
+                <td>{{$donate->name}}</td>
+                <td>{{$donate->email}}</td>
+                <td>{{$donate->amount}}</td>
+                <td>{{$donate->message}}</td>
+                <td>{{$donate->created_at}}</td>
             </tr>
             @endforeach
-          </tbody>
-        </table>
-    {{$data->links()}} 
+        </tbody>
+    </table>
+    <div class="pagination justify-content-center">
+        {{$data->links()}} 
+    </div>
 </div>
 
 @endsection

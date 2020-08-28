@@ -21,4 +21,4 @@ Route::get(
 
 Route::post('/donate/submit', 'DonationController@submit');
 
-Route::get('/', 'DonationController@allData');
+Route::get('/', 'DonationController@getChartData');

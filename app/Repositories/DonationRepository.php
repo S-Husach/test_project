@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Services\DonationService;
 use App\Http\Requests\DonationRequest;
 use App\Models\Donation;
 use Carbon\Carbon;
@@ -20,26 +21,36 @@ class DonationRepository
         return;
     }
 
-    public function allData()
+    public function getChartData()
     {
-        $data = Donation::select(
+        return Donation::select(
             Donation::raw('DATE(created_at) as date'),
             Donation::raw('sum(amount) as amount')
         )
             ->groupBy(Donation::raw('DATE(created_at)'))
             ->get();
-            $array[] = ['Date', 'Total donations'];
-        foreach ($data as $value) {
-            $array[] = [$value->date, (float) $value->amount];
-        }
-        return [
-                'data' => Donation::paginate(10),
-                'max' => Donation::OrderBy('amount', 'desc')->first(),
-                'totalMonth' => Donation::whereMonth(
-                    'created_at', Carbon::now()->month
-                )->sum('amount'),
-                'total' => Donation::sum('amount'),
-                'amount' => json_encode($array)
-        ];
     }
+
+    public function paginate($amount = 10)
+    {
+        return Donation::paginate($amount);
+    }
+
+    public function max()
+    {
+        return Donation::OrderBy('amount', 'desc')->first();
+    }
+
+    public function totalMonth()
+    {
+        return Donation::whereMonth(
+            'created_at', Carbon::now()->month
+        )->sum('amount');
+    }
+
+    public function total()
+    {
+        return Donation::sum('amount');
+    }
+
 }

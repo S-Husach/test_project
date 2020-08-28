@@ -17,7 +17,7 @@
     </div>
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Last Month Amount</h4>
+        <h4 class="my-0 font-weight-normal">Current Month Amount</h4>
       </div>
       <div class="card-body">
         <h1 class="card-title pricing-card-title">${{$totalMonth}}</h1>
@@ -39,6 +39,7 @@
 <script type="text/javascript">
 
 var analytics = <?php echo $amount; ?>
+
 google.charts.load('current', {'packages':['corechart', 'line']});
 google.charts.setOnLoadCallback(drawChart);
 

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\DonationRepository;
+use Illuminate\Http\Request;
 
 class DonationService
 {

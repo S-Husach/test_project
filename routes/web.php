@@ -19,6 +19,6 @@ Route::get(
     }
 );
 
-Route::post('/donate/submit', 'DonationController@submit');
+Route::post('/', 'DonationController@submit')->name('donation.submit');
 
 Route::get('/', 'DonationController@getChartData');

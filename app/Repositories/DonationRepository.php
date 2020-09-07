@@ -5,7 +5,10 @@ namespace App\Repositories;
 use App\Http\Services\DonationService;
 use App\Http\Requests\DonationRequest;
 use App\Models\Donation;
+use Illuminate\Http\Request;
+
 use Carbon\Carbon;
+use DB;
 
 class DonationRepository
 {
@@ -35,6 +38,14 @@ class DonationRepository
     {
         return Donation::paginate($amount);
     }
+
+    // public function fetch_data(Request $request) 
+    // {
+    //     // if($request->ajax()) {
+    //     // return Donation::paginate(10);
+    //     // }
+    //     return Donation::paginate(10);
+    // }
 
     public function max()
     {

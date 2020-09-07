@@ -8,7 +8,12 @@ center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
 <ul class="navbar-nav mr-auto"></ul>
 
 <nav class="my-2 my-md-2 mr-md-4">
-    <a class="p-3 text-dark" href="/">Dashboard</a>
-    <a class="p-3 text-dark" href="donate">Donate</a>
+<!--     <a class="p-3 text-dark" href="/">Dashboard</a>
+    <a class="p-3 text-dark" href="donate">Donate</a> -->
+
+<button type="button" class="btn btn-primary" 
+    data-toggle="modal" data-target="#donationModal">Donate
+</button>
+
 </nav>
 </div>

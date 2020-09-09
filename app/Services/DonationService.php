@@ -32,10 +32,27 @@ class DonationService
     {
         return [
             'data' => $this->donationRepository->paginate(),
-            'max' => $this->donationRepository->max(),
-            'totalMonth' => $this->donationRepository->totalMonth(),
-            'total' => $this->donationRepository->total(),
+            // 'max' => $this->donationRepository->max(),
+            // 'totalMonth' => $this->donationRepository->totalMonth(),
+            // 'total' => $this->donationRepository->total(),
             'amount' => $this->prepareAmountData()
         ];
     }
+
+    public function formatTableData(Request $request)
+    {
+        return [
+            'data' => $this->donationRepository->fetch_data($request)
+        ];
+    }
+
+    public function formatWidgetData(Request $request)
+    {
+        return [
+            'max' => $this->donationRepository->fetch_max($request),
+            'totalMonth' => $this->donationRepository->fetch_totalMonth($request),
+            'total' => $this->donationRepository->fetch_total($request),
+        ];
+    }
+
 }

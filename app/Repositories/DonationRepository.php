@@ -21,7 +21,6 @@ class DonationRepository
         $donation->amount = $req->input('amount');
         $donation->message = $req->input('message');
         $donation->save();
-        return;
     }
 
     public function getChartData()
@@ -39,29 +38,50 @@ class DonationRepository
         return Donation::paginate($amount);
     }
 
-    // public function fetch_data(Request $request) 
+    public function fetch_data($request) 
+    {
+        if ($request->ajax()) {
+            return Donation::paginate(10);
+        }
+    }
+
+    // public function max()
     // {
-    //     // if($request->ajax()) {
-    //     // return Donation::paginate(10);
-    //     // }
-    //     return Donation::paginate(10);
+    //     return Donation::OrderBy('amount', 'desc')->first();
     // }
 
-    public function max()
+    public function fetch_max($request)
     {
-        return Donation::OrderBy('amount', 'desc')->first();
+        if ($request->ajax()) {
+            return Donation::OrderBy('amount', 'desc')->first();
+        }
     }
 
-    public function totalMonth()
+    // public function totalMonth()
+    // {
+    //     return Donation::whereMonth(
+    //         'created_at', Carbon::now()->month
+    //     )->sum('amount');
+    // }
+
+    public function fetch_totalMonth($request)
     {
-        return Donation::whereMonth(
-            'created_at', Carbon::now()->month
-        )->sum('amount');
+        if ($request->ajax()) {
+            return Donation::whereMonth(
+                'created_at', Carbon::now()->month
+            )->sum('amount');
+        }
     }
 
-    public function total()
-    {
-        return Donation::sum('amount');
-    }
+    // public function total()
+    // {
+    //     return Donation::sum('amount');
+    // }
 
+    public function fetch_total($request)
+    {
+        if ($request->ajax()) {
+            return Donation::sum('amount');
+        }
+    }
 }

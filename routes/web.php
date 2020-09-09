@@ -22,3 +22,7 @@ Route::get(
 Route::post('/', 'DonationController@submit')->name('donation.submit');
 
 Route::get('/', 'DonationController@getChartData');
+
+Route::get('/pagination', 'DonationController@getTableData');
+
+Route::get('/widget', 'DonationController@getWidgetData');

@@ -31,6 +31,28 @@ class DonationController extends Controller
 
     public function getChartData()
     {
-        return view('dashboard', $this->donationService->formatChatData());
+        return view(
+            'dashboard',
+            $this->donationService->formatChatData()
+        );
     }
+
+    public function getTableData(Request $request)
+    {
+        return view(
+            'inc/table',
+            $this->donationService->formatTableData($request)
+        )->render();
+    }
+
+    public function getWidgetData(Request $request)
+    {   
+        // return view(
+        //     'inc/widget',
+        //     $this->donationService->formatWidgetData()
+        // )->render();
+
+        return response()->json($this->donationService->formatWidgetData($request), 200);
+    }
+
 }

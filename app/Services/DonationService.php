@@ -28,16 +28,35 @@ class DonationService
         return json_encode($array);
     }
 
-    public function formatChatData()
+    public function formatInitialTableData()
     {
         return [
             'data' => $this->donationRepository->paginate(),
-            // 'max' => $this->donationRepository->max(),
-            // 'totalMonth' => $this->donationRepository->totalMonth(),
-            // 'total' => $this->donationRepository->total(),
-            'amount' => $this->prepareAmountData()
+            'amount' => $this->prepareAmountData() // ajax
         ];
     }
+
+// ajax
+
+    // public function prepareAjaxAmountData(Request $request)
+    // {
+    //     $data = $this->donationRepository->getAjaxChartData($request);
+
+    //     $array[] = ['Date', 'Total donations'];
+
+    //     foreach ($data as $value) {
+    //         $array[] = [$value->date, (float) $value->amount];
+    //     }
+
+    //     return json_encode($array);
+    // }
+
+    // public function formatAjaxChartData(Request $request)
+    // {
+    //     return [
+    //         'amount' => $this->prepareAjaxAmountData($request)
+    //     ];
+    // }
 
     public function formatTableData(Request $request)
     {

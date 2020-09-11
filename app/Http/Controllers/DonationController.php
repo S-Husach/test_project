@@ -29,29 +29,29 @@ class DonationController extends Controller
         return redirect('/');
     }
 
-    public function getChartData()
+    public function getInitialTableData()
     {
         return view(
             'dashboard',
-            $this->donationService->formatChatData()
+            $this->donationService->formatInitialTableData()
         );
     }
 
+// ajax
+
+    // public function gerChartData(Request $request)
+    // {
+    //     return $this->donationService->formatAjaxChartData($request);
+    // }
+
+
     public function getTableData(Request $request)
     {
-        return view(
-            'inc/table',
-            $this->donationService->formatTableData($request)
-        )->render();
+        return $this->donationService->formatTableData($request);
     }
 
     public function getWidgetData(Request $request)
-    {   
-        // return view(
-        //     'inc/widget',
-        //     $this->donationService->formatWidgetData()
-        // )->render();
-
+    {
         return response()->json($this->donationService->formatWidgetData($request), 200);
     }
 

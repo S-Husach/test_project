@@ -15,6 +15,7 @@ class DonationService
         $this->donationRepository = $donationRepository;
     }
 
+
     public function prepareAmountData()
     {
         $data = $this->donationRepository->getChartData();
@@ -38,25 +39,23 @@ class DonationService
 
 // ajax
 
-    // public function prepareAjaxAmountData(Request $request)
-    // {
-    //     $data = $this->donationRepository->getAjaxChartData($request);
+    public function prepareAjaxAmountData()
+    {
+        $data = $this->donationRepository->getAjaxChartData();
 
-    //     $array[] = ['Date', 'Total donations'];
+        $array[] = ['Date', 'Total donations'];
 
-    //     foreach ($data as $value) {
-    //         $array[] = [$value->date, (float) $value->amount];
-    //     }
+        foreach ($data as $value) {
+            $array[] = [$value->date, (float) $value->amount];
+        }
 
-    //     return json_encode($array);
-    // }
+        return json_encode($array);
+    }
 
-    // public function formatAjaxChartData(Request $request)
-    // {
-    //     return [
-    //         'amount' => $this->prepareAjaxAmountData($request)
-    //     ];
-    // }
+    public function formatAjaxChartData()
+    {
+        return $this->prepareAjaxAmountData();
+    }
 
     public function formatTableData(Request $request)
     {

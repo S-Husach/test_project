@@ -42,9 +42,10 @@ $(document).ready(function(){
     {
         $.ajax({
             url:"/pagination/?page="+page,
+
             success: function(data)
             {
-                // console.log(data);
+                // console.log('data', data);
                 $('.table_data').html(data);
             }
         });

@@ -11,7 +11,6 @@ use App\Models\Donation;
 
 class DonationController extends Controller
 {
-
     private $donationService;
     private $donationRepository;
 
@@ -37,13 +36,10 @@ class DonationController extends Controller
         );
     }
 
-// ajax
-
-    // public function gerChartData(Request $request)
-    // {
-    //     return $this->donationService->formatAjaxChartData($request);
-    // }
-
+    public function getChartData()
+    {
+        return $this->donationService->formatAjaxChartData();
+    }
 
     public function getTableData(Request $request)
     {

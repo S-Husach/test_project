@@ -25,27 +25,23 @@ class DonationRepository
 
     public function getChartData()
     {
-        // if ($request->ajax()) {
             return Donation::select(
                 Donation::raw('DATE(created_at) as date'),
                 Donation::raw('sum(amount) as amount')
             )
                 ->groupBy(Donation::raw('DATE(created_at)'))
                 ->get();
-        // }
     }
 
-    // public function getAjaxChartData($request)
-    // {
-    //     if ($request->ajax()) {
-    //         return Donation::select(
-    //             Donation::raw('DATE(created_at) as date'),
-    //             Donation::raw('sum(amount) as amount')
-    //         )
-    //             ->groupBy(Donation::raw('DATE(created_at)'))
-    //             ->get();
-    //     }
-    // }
+    public function getAjaxChartData()
+    {
+            return Donation::select(
+                Donation::raw('DATE(created_at) as date'),
+                Donation::raw('sum(amount) as amount')
+            )
+                ->groupBy(Donation::raw('DATE(created_at)'))
+                ->get();
+    }
 
     public function paginate($amount = 10)
     {
@@ -62,7 +58,10 @@ class DonationRepository
     public function fetch_max($request)
     {
         if ($request->ajax()) {
-            return Donation::OrderBy('amount', 'desc')->first();
+            return Donation::select(
+                Donation::raw('name as name'),
+                Donation::raw('amount as amount')
+            )->OrderBy('amount', 'desc')->first();
         }
     }
 

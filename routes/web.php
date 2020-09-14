@@ -27,4 +27,4 @@ Route::get('/pagination', 'DonationController@getTableData');
 
 Route::get('/widget', 'DonationController@getWidgetData');
 
-// Route::get('/chart', 'DonationController@getChartData');
+Route::get('/chart', 'DonationController@getChartData');
